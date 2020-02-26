@@ -171,7 +171,8 @@ Using our bundles
 To use our admin bundles, we'll insert them into the parent template for
 the admin section: *admin/layout.html*.
 
-::
+.. code-block:: html
+   :linenos:
 
    templates/
        home/
@@ -183,7 +184,8 @@ the admin section: *admin/layout.html*.
            dash.html
            stats.html
 
-::
+.. code-block:: html
+   :linenos:
 
     {# myapp/templates/admin/layout.html #}
 

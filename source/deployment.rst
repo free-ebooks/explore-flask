@@ -123,7 +123,8 @@ environment with Pip. Running our app is a simple command away.
 A fine app indeed. Now, to serve it up with Gunicorn, we simply run the
 ``gunicorn`` command.
 
-::
+.. code-block:: bash
+   :linenos:
 
    (ourapp)$ gunicorn rocket:app
    2014-03-19 16:28:54 [62924] [INFO] Starting gunicorn 18.0
@@ -137,7 +138,8 @@ To run this server in the background (i.e. daemonize it), we can pass the ``-D``
 
 If we daemonize Gunicorn, we might have a hard time finding the process to close later when we want to stop the server. We can tell Gunicorn to stick the process ID in a file so that we can stop or restart it later without searching through lists of running processess. We use the ``-p <file>`` option to do that.
 
-::
+.. code-block:: bash
+   :linenos:
 
    (ourapp)$ gunicorn rocket:app -p rocket.pid -D
    (ourapp)$ cat rocket.pid
@@ -145,14 +147,16 @@ If we daemonize Gunicorn, we might have a hard time finding the process to close
 
 To restart and kill the server, we can run ``kill -HUP`` and ``kill`` respectively.
 
-::
+.. code-block:: bash
+   :linenos:
 
    (ourapp)$ kill -HUP `cat rocket.pid`
    (ourapp)$ kill `cat rocket.pid`
 
 By default Gunicorn runs on port 8000. We can change the port by adding the ``-b`` bind option.
 
-::
+.. code-block:: bash
+   :linenos:
 
    (ourapp)$ gunicorn rocket:app -p rocket.pid -b 127.0.0.1:7999 -D
 
@@ -172,7 +176,8 @@ Gunicorn server. If, however, we need to make requests from outside of
 the server for debugging purposes, we can tell Gunicorn to bind to
 0.0.0.0. This tells it to listen for all requests.
 
-::
+.. code-block:: bash
+   :linenos:
 
     (ourapp)$ gunicorn rocket:app -p rocket.pid -b 0.0.0.0:8000 -D
 
@@ -193,7 +198,8 @@ To configure Nginx as a reverse proxy to a Gunicorn server running on
 127.0.0.1:8000, we can create a file for our app:
 */etc/nginx/sites-available/exploreflask.com*.
 
-::
+.. code-block:: nginx
+   :linenos:
 
     # /etc/nginx/sites-available/exploreflask.com
 
@@ -212,8 +218,8 @@ To configure Nginx as a reverse proxy to a Gunicorn server running on
             location / {
                             # Pass the request to Gunicorn
                     proxy_pass http://127.0.0.1:8000;
-                    
-                    # Set some HTTP headers so that our app knows where the 
+
+                    # Set some HTTP headers so that our app knows where the
                     # request really came from
                     proxy_set_header Host $host;
                     proxy_set_header X-Real-IP $remote_addr;
@@ -224,7 +230,8 @@ To configure Nginx as a reverse proxy to a Gunicorn server running on
 Now we'll create a symlink to this file at */etc/nginx/sites-enabled*
 and restart Nginx.
 
-::
+.. code-block:: bash
+   :linenos:
 
     $ sudo ln -s \
     /etc/nginx/sites-available/exploreflask.com \
@@ -240,42 +247,43 @@ response from our app.
 Haproxy
 ~~~~~~~~~~~~~~~~~~~
 
-`Haproxy <http://www.haproxy.org/> ` can be used in Dockerized environments effectively. You can define more then one running container and Haproxy effectively manages the defined servers.  
+`Haproxy <http://www.haproxy.org/>`_ can be used in Dockerized environments effectively. You can define more then one running container and Haproxy effectively manages the defined servers.
 
-::
+.. code-block:: none
+   :linenos:
 
-frontend http-internal
-    bind *:80
-    reqadd X-Forwarded-Proto:\ http
-    reqadd X-Forwarded-Proto:\ https
-    acl letsencrypt-acl path_beg /.well-known/acme-challenge/
-    use_backend letsencrypt-backend if letsencrypt-acl
-    ### RATE LIMITING ###############################
-    stick-table type ip size 1m expire 60s store gpc0,http_req_rate(60s)
-    tcp-request connection track-sc0 src
-    use_backend http_429  if { src_get_gpc0 gt 0 }
-   # tcp-request content reject if { src_get_gpc0 gt 0 }
-   # http-request deny if { src_get_gpc0 gt 0 }
-    #################################################
-    capture request header Host len 64
-    capture request header origin len 128
-    acl is_auth hdr(host) -i your.site.com
-    
-    use_backend auth if is_auth
+   frontend http-internal
+      bind *:80
+      reqadd X-Forwarded-Proto:\ http
+      reqadd X-Forwarded-Proto:\ https
+      acl letsencrypt-acl path_beg /.well-known/acme-challenge/
+      use_backend letsencrypt-backend if letsencrypt-acl
+      ### RATE LIMITING ###############################
+      stick-table type ip size 1m expire 60s store gpc0,http_req_rate(60s)
+      tcp-request connection track-sc0 src
+      use_backend http_429  if { src_get_gpc0 gt 0 }
+      # tcp-request content reject if { src_get_gpc0 gt 0 }
+      # http-request deny if { src_get_gpc0 gt 0 }
+      #################################################
+      capture request header Host len 64
+      capture request header origin len 128
+      acl is_auth hdr(host) -i your.site.com
 
-backend auth
-    mode http
-    balance roundrobin
-    option httpclose
-    option forwardfor
-    redirect scheme https if !{ ssl_fc }
-    server worker-01 172.17.0.5:5000 check inter 10s
-    server worker-02 172.17.0.6:5000 check inter 10s
-    server worker-03 172.17.0.7:5000 check inter 10s
+      use_backend auth if is_auth
+
+   backend auth
+      mode http
+      balance roundrobin
+      option httpclose
+      option forwardfor
+      redirect scheme https if !{ ssl_fc }
+      server worker-01 172.17.0.5:5000 check inter 10s
+      server worker-02 172.17.0.6:5000 check inter 10s
+      server worker-03 172.17.0.7:5000 check inter 10s
 
 .. note::
 
-   This config file is here to show how frontend and backend defined in haproxy for Flask app. Most of the parts of this config is excluded to show only Flask related stuff. Please also check SSL integration with `LetsEncrypt <https://letsencrypt.org/>` too. 
+   This config file is here to show how frontend and backend defined in haproxy for Flask app. Most of the parts of this config is excluded to show only Flask related stuff. Please also check SSL integration with `LetsEncrypt <https://letsencrypt.org/>` too.
 
 
 ProxyFix
@@ -319,4 +327,3 @@ Summary
    requests) not 0.0.0.0 (external requests).
 -  Use Werkzeug's ProxyFix to handle the appropriate proxy headers in
    your Flask application.
-

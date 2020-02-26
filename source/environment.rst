@@ -44,7 +44,8 @@ environments. Navigate to your project directory and run the
 directory of the virtual environment. Listing~ shows what this looks
 like.
 
-::
+.. code-block:: bash
+   :linenos:
 
    $ virtualenv venv
    New python executable in venv/bin/python
@@ -59,7 +60,8 @@ Once the new virtual environment has been created, you must activate it
 by sourcing the *bin/activate* script that was created inside the
 virtual environment.
 
-::
+.. code-block:: bash
+   :linenos:
 
    $ which python
    /usr/local/bin/python
@@ -73,7 +75,8 @@ You may notice that the shell prompt has been changed too. virtualenv prepends t
 
 You can deactivate your virtual environment by running the ``deactivate`` command.
 
-::
+.. code-block:: bash
+   :linenos:
 
    (venv)$ deactivate
    $
@@ -93,7 +96,8 @@ To install virtualenvwrapper, follow the instructions in the documentation.
 
 Now, instead of running ``virtualenv`` to create an environment, you'll run ``mkvirtualenv``:
 
-::
+.. code-block:: bash
+   :linenos:
 
    $ mkvirtualenv rocket
    New python executable in rocket/bin/python
@@ -113,11 +117,13 @@ pip freeze
 
 *requirements.txt* is a text file used by many Flask applications to list all of the packages needed to run an application. This code block shows how to create this file and the following one shows how to use that text file to install your dependencies in a new environment.
 
-:: 
+.. code-block:: bash
+   :linenos:
 
    (rocket)$ pip freeze > requirements.txt
 
-::
+.. code-block:: bash
+   :linenos:
 
     $ workon fresh-env
     (fresh-env)$ pip install -r requirements.txt
@@ -183,7 +189,7 @@ Instance folders are used to make secret configuration variables
 available to your application in a more secure way. We'll talk more
 about them later.
 
-.. note:: 
+.. note::
 
    You can read more about *.gitignore* here: http://git-scm.com/docs/gitignore
 
@@ -227,4 +233,3 @@ Summary
 -  Debug mode can give you information about problems in development.
 -  The Flask-DebugToolbar extension will give you even more of that
    information.
-

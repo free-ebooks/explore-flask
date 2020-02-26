@@ -96,7 +96,8 @@ Inheritance is implemented with the ``{% extends %}`` and
 ``{% block %}`` tags. In the parent template, we can define blocks which
 will be populated by child templates.
 
-::
+.. code-block:: html
+   :linenos:
 
     {# _myapp/templates/layout.html_ #}
 
@@ -115,7 +116,8 @@ will be populated by child templates.
 In the child template, we can extend the parent template and define the
 contents of those blocks.
 
-::
+.. code-block:: html
+   :linenos:
 
     {# _myapp/templates/index.html_ #}
 
@@ -146,7 +148,8 @@ to the current page). Without macros we'd end up with a block of
 Macros provide a way to modularize that code; they work like functions.
 Let's look at how we'd mark the active link using a macro.
 
-::
+.. code-block:: html
+   :linenos:
 
     {# myapp/templates/layout.html #}
 
@@ -309,4 +312,3 @@ Summary
    former.
 -  Macros are like functions made-up of template code.
 -  Filters are functions made-up of Python code and used in templates.
-

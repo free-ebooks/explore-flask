@@ -111,7 +111,8 @@ The view that we've defined handles the creation of the user and sends off an
 email to the given email address. You may notice that we're using a
 template to generate the HTML for the email.
 
-::
+.. code-block:: html
+   :linenos:
 
    {# ourapp/templates/email/activate.html #}
 
@@ -209,7 +210,8 @@ though.
 To test the time it takes to hash a password, we can time a quick Python
 script that, well, hashes a password.
 
-::
+.. code-block:: bash
+   :linenos:
 
    # benchmark.py
 
@@ -222,7 +224,8 @@ script that, well, hashes a password.
 Now we can keep timing our changes to the number of rounds with the UNIX
 ``time`` utility.
 
-::
+.. code-block:: bash
+   :linenos:
 
     $ time python test.py
 
@@ -589,4 +592,3 @@ Summary
    with a bunch of session management stuff yourself.
 -  Always think about how a malicious user could abuse your app to do
    things that you didn't intend.
-

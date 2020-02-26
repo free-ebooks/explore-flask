@@ -118,7 +118,8 @@ SQLAlchemy has a really cool command that will do all of this for us.
 
 Let's open up a Python terminal in our repository root.
 
-::
+.. code-block:: bash
+   :linenos:
 
     $ pwd
     /Users/me/Code/myapp
@@ -159,7 +160,8 @@ we'll have a new directory with the very creative name *alembic*. Our
 repository will end up looking something like the example in this listing,
 adapted from the Alembic tutorial.
 
-::
+.. code-block:: none
+   :linenos:
 
     ourapp/
         alembic.ini
@@ -226,4 +228,3 @@ Summary
 -  You can use NoSQL databases with Flask, but the methods and tools
    vary between engines.
 -  Back up your data!
-

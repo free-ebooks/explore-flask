@@ -8,6 +8,7 @@ Coding conventions
 .. image:: _static/images/conventions.png
    :alt: Coding conventions
    :height: 100 pt
+
 There are a number of conventions in the Python community to guide the
 way you format your code. If you've been developing with Python for a
 while, then you might already be familiar with some of these
@@ -117,4 +118,3 @@ Summary
 -  Try to follow the coding style conventions laid out in PEP 8.
 -  Try to document your app with docstrings as defined in PEP 257.
 -  Use relative imports to import your app's internal modules.
-
