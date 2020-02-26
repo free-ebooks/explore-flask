@@ -14,7 +14,7 @@
 
 import sys
 import os
-import sphinx_rtd_theme
+#import sphinx_rtd_theme
 
 
 # If extensions (or modules to document with autodoc) are in another directory,
@@ -30,7 +30,7 @@ import sphinx_rtd_theme
 # Add any Sphinx extension module names here, as strings. They can be
 # extensions coming with Sphinx (named 'sphinx.ext.*') or your custom
 # ones.
-extensions = []
+extensions = ['sphinx_sitemap']
 
 # Add any paths that contain templates here, relative to this directory.
 templates_path = ['_templates']
@@ -108,7 +108,43 @@ html_theme = 'sphinx_rtd_theme'
 #html_theme_options = {}
 
 # Add any paths that contain custom themes here, relative to this directory.
-html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+#html_theme_path = [sphinx_rtd_theme.get_html_theme_path()]
+html_theme_path = ['theme']
+
+html_theme_options = {
+    'canonical_url': 'https://djangocas.dev/free-books/explore-flask',
+    'analytics_id': 'UA-156453684-1',
+    # 'logo_only': False,
+    'display_version': True,
+    'prev_next_buttons_location': 'bottom',
+    'style_external_links': True,
+    # 'vcs_pageview_mode': '',
+    # 'style_nav_header_background': 'white',
+    # Toc options
+    # 'collapse_navigation': True,
+    # 'sticky_navigation': True,
+    # 'navigation_depth': 4,
+    # 'includehidden': True,
+    # 'titles_only': False
+}
+
+html_show_sourcelink = False
+
+# https://pypi.org/project/sphinx-sitemap/
+html_baseurl = 'https://djangocas.dev/free-books/explore-flask/'
+
+# sitemap: Customizing the URL scheme
+#
+# If you have both language and version set,
+# the default URL format is {version}{lang}{link}.
+# To change the default behavior,
+# set the value of sitemap_url_scheme in your
+# Sphinx conf.py to the desired format. For example:
+#
+# sitemap_url_scheme = "{lang}{version}subdir/{link}"
+#
+# Default: {version}{lang}{link}
+sitemap_url_scheme = "{link}"
 
 # The name for this set of Sphinx documents.  If None, it defaults to
 # "<project> v<release> documentation".
