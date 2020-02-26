@@ -1,6 +1,6 @@
 
 .. highlight:: python
-    :linenothreshold: 0
+    :linenothreshold: 2
 
 Advanced patterns for views and routing
 =======================================
