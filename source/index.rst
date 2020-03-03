@@ -1,4 +1,3 @@
-
 .. highlight:: python
     :linenothreshold: 2
 
@@ -28,6 +27,11 @@ try and be everything to everyone. That model works for a lot of people, but not
 
 If you want to get in touch, feel free to send me an email at robert@robert.io or connect on twitter `@__rlp <https://twitter.com/__rlp>`_. If you have
 feedback on the book, check out the `GitHub repository <https://github.com/rpicard/explore-flask>`_ too.
+
+.. note::
+
+   This site is a fork of *rpicard/explore-flask* with the latest updates by open source community.
+   You can find `the forked github repo here <https://github.com/free-ebooks/explore-flask>`_.
 
 Contents
 --------
@@ -92,4 +96,4 @@ Have fun with it.
 Contributing
 ------------
 
-The project is hosted `on GitHub <https://github.com/rpicard/explore-flask>`_ and pull requests are welcome!
+The project is hosted `on GitHub <https://github.com/free-ebooks/explore-flask>`_ and pull requests are welcome!
