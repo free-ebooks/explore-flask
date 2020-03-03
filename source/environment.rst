@@ -1,4 +1,3 @@
-
 .. highlight:: python
     :linenothreshold: 2
 
@@ -43,6 +42,14 @@ environments. Navigate to your project directory and run the
 ``virtualenv`` command. It takes one argument, which is the destination
 directory of the virtual environment. Listing~ shows what this looks
 like.
+
+For Python 3, ``virtualenv`` is embedded:
+
+.. code-block:: bash
+
+   python3 -m venv /path/to/new/virtualenv
+
+For Python 2, use ``virtualenv`` to create virtualenv.
 
 .. code-block:: bash
    :linenos:
